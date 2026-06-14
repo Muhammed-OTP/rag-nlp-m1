@@ -2,3 +2,4 @@ CHUNK_SIZE = 512
 CHUNK_OVERLAP = 50
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 TOP_K = 3
+GROQ_MODEL = "llama-3.3-70b-versatile"

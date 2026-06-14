@@ -36,13 +36,16 @@ centralized in [`config.py`](config.py).
 ```
 rag-nlp-m1/
 ├── collect_corpus.py      # downloads the Wikipedia corpus into data/raw/
-├── config.py               # shared parameters (chunk size, overlap, model, top_k)
+├── config.py               # shared parameters (chunk size, overlap, model, top_k, Groq model)
 ├── src/
-│   └── prepare_data.py     # cleans & chunks the corpus -> data/processed/chunks.jsonl
+│   ├── prepare_data.py     # cleans & chunks the corpus -> data/processed/chunks.jsonl
+│   ├── build_index.py      # embeds chunks and stores them in ChromaDB (chroma_db/)
+│   └── rag_pipeline.py     # retriever + Groq LLM pipeline, interactive CLI
 ├── data/
 │   ├── raw/                 # raw Wikipedia articles (gitignored)
 │   └── processed/
 │       └── chunks.jsonl     # cleaned, chunked corpus (1443 chunks)
+├── chroma_db/               # persistent ChromaDB vector index (gitignored, rebuilt by build_index.py)
 ├── evaluation/              # evaluation dataset & metrics scripts (Phase 5)
 ├── visualizations/          # result charts (Phase 6)
 ├── notebooks/               # exploratory notebooks
@@ -73,12 +76,29 @@ GROQ_API_KEY=your_key_here
    links), and splits the remaining 34 documents into overlapping chunks
    (`CHUNK_SIZE=512`, `CHUNK_OVERLAP=50`), producing 1443 chunks in
    `data/processed/chunks.jsonl`.
+3. **Vector index** (`src/build_index.py`): embeds every chunk with
+   `all-MiniLM-L6-v2` and stores the vectors, text, and source article in a
+   persistent ChromaDB collection (`nlp_corpus`) under `chroma_db/`.
+4. **RAG pipeline** (`src/rag_pipeline.py`): embeds the user's question,
+   retrieves the top `TOP_K` chunks from `chroma_db/`, fills a prompt
+   template with that context, and calls the Groq LLM (`GROQ_MODEL`) to
+   produce a grounded answer along with its source chunks.
 
-Upcoming steps (vector index, retrieval + LLM pipeline, Streamlit UI,
-evaluation, visualizations, report) are tracked in
-[`PHASES.md`](PHASES.md).
+## Asking a question
+
+```bash
+python -m src.rag_pipeline
+```
+
+This starts an interactive prompt: type a question, get an answer plus the
+source chunks it was grounded in, and type `exit` to quit. Requires
+`chroma_db/` to exist (run `python -m src.build_index` once to build it) and
+a valid `GROQ_API_KEY` in `.env`.
+
+Upcoming steps (Streamlit UI, evaluation, visualizations, report) are tracked
+in [`PHASES.md`](PHASES.md).
 
 ## Project status
 
-Phases 0 and 1 are complete. See [`PHASES.md`](PHASES.md) for the full
-roadmap and per-phase results.
+Phases 0-3 are complete. See [`PHASES.md`](PHASES.md) for the full roadmap
+and per-phase results.

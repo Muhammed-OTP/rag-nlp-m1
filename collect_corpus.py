@@ -53,7 +53,7 @@ DELAY = 2.0
 MAX_RETRIES = 5
 
 
-def fetch_article(title):
+def fetch_article(title: str) -> str:
     params = {
         "action": "query",
         "prop": "extracts",
@@ -85,6 +85,7 @@ def fetch_article(title):
                 time.sleep(wait)
             else:
                 raise
+    raise RuntimeError(f"Failed to fetch {title} after {MAX_RETRIES} attempts")
 
 
 succeeded = 0

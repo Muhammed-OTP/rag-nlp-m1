@@ -28,11 +28,19 @@ Do not start a phase until the previous one is checked off.
   query ("What is attention in machine learning?") which correctly retrieved
   chunks from the "Attention (machine learning)" article.
 
-- [ ] **Phase 3 — RAG pipeline (retriever + LLM)**
+- [x] **Phase 3 — RAG pipeline (retriever + LLM)**
   Given a question: embed it, retrieve top-k chunks from Chroma, fill a prompt
   template with the retrieved context, call the Groq LLM, return the answer +
   source chunks. Script: `src/rag_pipeline.py` + a small CLI to ask questions
   from the terminal.
+  Result: `src/rag_pipeline.py` embeds the question with `all-MiniLM-L6-v2`,
+  retrieves `TOP_K=3` chunks from the `nlp_corpus` ChromaDB collection, fills
+  a prompt template with that context, and calls Groq (`GROQ_MODEL` in
+  `config.py`, `llama-3.3-70b-versatile`) to generate an answer. Run with
+  `python -m src.rag_pipeline` for an interactive terminal CLI that prints the
+  answer and the source chunks. Tested with "What is attention in machine
+  learning?" — correct answer grounded in the "Attention (machine learning)"
+  article.
 
 - [ ] **Phase 4 — Streamlit interface**
   Minimal UI (`app.py`): text box for the question, shows the answer and the
