@@ -48,9 +48,12 @@ La commande \texttt{python -m src.rag\_pipeline} lance une boucle interactive : 
 pose une question, le syst\`eme affiche la r\'eponse et les documents sources. Cette interface
 a servi de base pour valider le pipeline avant l'\'evaluation automatique.
 
-\subsubsection{Streamlit (impl\'ement\'ee, validation en cours)}
+\subsubsection{Streamlit (valid\'ee)}
 
-L'application \texttt{app.py} organise l'interface en trois onglets :
+L'application \texttt{app.py} a \'et\'e test\'ee avec succ\`es (\texttt{streamlit run app.py}).
+Les questions pos\'ees via l'onglet Chat produisent des r\'eponses pr\'ecises, correctement
+ancr\'ees dans les chunks sources affich\'es (temps de r\'eponse, score de fid\'elit\'e et
+similarit\'e inclus). L'interface est organis\'ee en trois onglets :
 \begin{itemize}[noitemsep]
   \item \textbf{Chat} : conversation avec affichage du temps de r\'eponse, des chunks utilis\'es,
         d'un score de fid\'elit\'e et des extraits sources ;
@@ -61,8 +64,8 @@ L'application \texttt{app.py} organise l'interface en trois onglets :
 \end{itemize}
 
 La barre lat\'erale permet de choisir le mod\`ele LLM Groq, d'ajuster \texttt{top-k} et le seuil
-de similarit\'e. Les tests finaux de cette interface et la pr\'eparation de la d\'emonstration
-orale constituent le travail restant identifi\'e en section~\ref{sec:etat}.
+de similarit\'e. Cette interface constitue le point d'entr\'ee pr\'evu pour la d\'emonstration
+orale du 15 juin 2026.
 
 \subsection{Scripts principaux}
 

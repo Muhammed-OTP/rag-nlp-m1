@@ -2,9 +2,9 @@
 \label{sec:etat}
 
 Afin de rester fid\`ele \`a l'\'etat r\'eel du d\'ep\^ot au moment de la remise, le tableau
-ci-dessous distingue les composants termin\'es, ceux en cours de finalisation et ceux encore
-\`a compl\'eter. Le suivi d\'etaill\'e est \\'egalement consign\'e dans le fichier
-\texttt{PHASES.md} du d\'ep\^ot GitHub.
+ci-dessous distingue les composants termin\'es et le travail restant avant la soutenance.
+Le suivi d\'etaill\'e est \'egalement consign\'e dans le fichier \texttt{PHASES.md} du d\'ep\^ot
+GitHub.
 
 \begin{table}[H]
   \centering
@@ -18,12 +18,12 @@ ci-dessous distingue les composants termin\'es, ceux en cours de finalisation et
     Nettoyage et chunking & Termin\'e & \texttt{src/prepare\_data.py}, 1443 chunks \\
     Index vectoriel ChromaDB & Termin\'e & \texttt{src/build\_index.py}, \texttt{chroma\_db/} \\
     Pipeline RAG (CLI) & Termin\'e & \texttt{src/rag\_pipeline.py} \\
-    Interface Streamlit & Impl\'ement\'ee, tests finaux en cours & \texttt{app.py} \\
+    Interface Streamlit & Termin\'e et valid\'ee & \texttt{app.py} \\
     Jeu d'\'evaluation (34 questions) & Termin\'e & \texttt{evaluation/eval\_questions.json} \\
     M\'etriques et r\'esultats CSV & Termin\'e & \texttt{evaluation/evaluate.py}, \texttt{results.csv} \\
     Visualisations & Termin\'e & \texttt{visualizations/plot\_results.py}, figures PNG \\
-    Rapport PDF (LaTeX) & Remis (ce document) & \texttt{report/overleaf/} \\
-    Revue finale et d\'emo orale & En cours & README, script de d\'emonstration \\
+    Rapport PDF (LaTeX) & Termin\'e & \texttt{report/overleaf/} \\
+    Revue finale et d\'emo orale & Termin\'e & \texttt{README.md}, \texttt{DEMO.md} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -35,25 +35,24 @@ ci-dessous distingue les composants termin\'es, ceux en cours de finalisation et
         1443 chunks index\'es dans ChromaDB.
   \item Interrogation du syst\`eme en ligne de commande
         (\texttt{python -m src.rag\_pipeline}) avec affichage de la r\'eponse et des sources.
+  \item Interface Streamlit op\'erationnelle (\texttt{streamlit run app.py}) : onglet Chat test\'e
+        avec succ\`es sur des questions du domaine NLP/ML ; r\'eponses pr\'ecises et bien ancr\'ees
+        dans les sources affich\'ees.
   \item \'Evaluation automatique sur 34 questions avec calcul de Precision@3, Recall@3,
         fid\'elit\'e lexicale et temps de r\'eponse ; r\'esultats stock\'es dans
         \texttt{evaluation/results.csv}.
   \item G\'en\'eration de graphiques \`a partir des r\'esultats d'\'evaluation.
 \end{itemize}
 
-\subsection{Travail restant}
+\subsection{Perspectives futures}
 
 \begin{itemize}[noitemsep]
-  \item \textbf{Interface Streamlit} : l'application (\texttt{app.py}) propose trois onglets
-        (Chat, \'Evaluation, Gestion du corpus). Les tests utilisateur finaux et la pr\'eparation
-        de la d\'emonstration en direct (15 juin 2026) sont en cours.
-  \item \textbf{Documentation et d\'emo} : mise \`a jour du \texttt{README.md} avec les
-        instructions compl\`etes (Streamlit, \'evaluation, rapport) et pr\'eparation d'un sc\'enario
-        de d\'emonstration oral.
-  \item \textbf{Am\'eliorations possibles} (hors remise imm\'ediate) : re-ranking des chunks,
-        m\'etrique de fid\'elit\'e plus fine (LLM-as-judge), extension du corpus.
+  \item Re-ranking des chunks (cross-encoder) pour am\'eliorer la precision sur les sujets
+        voisins ;
+  \item M\'etrique de fid\'elit\'e plus fine (LLM-as-judge) ;
+  \item Extension du corpus (sources r\'ecentes, contenu multilingue).
 \end{itemize}
 
-Ce positionnement transparent permet de pr\'esenter des r\'esultats d'\'evaluation r\'eels sur le
-pipeline principal, tout en indiquant clairement les parties encore en cours de stabilisation
-avant la soutenance.
+Le syst\`eme couvre l'ensemble de la cha\^ine demand\'ee par le sujet. La documentation
+(\texttt{README.md}) et le script de d\'emonstration (\texttt{DEMO.md}) accompagnent la
+soutenance orale du 15 juin 2026.

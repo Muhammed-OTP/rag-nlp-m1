@@ -13,7 +13,11 @@
   \item La \textbf{fid\'elit\'e moyenne de 0.887} et le prompt restrictif limitent les
         hallucinations dans la majorit\'e des cas observ\'es.
   \item Le \textbf{temps de r\'eponse moyen de 0.81~s} rend le syst\`eme utilisable de mani\`ere
-        interactive via le CLI (et, une fois valid\'ee, via Streamlit).
+        interactive, valid\'e \`a la fois via le CLI et l'interface Streamlit.
+  \item L'interface Streamlit (onglet Chat) a \'et\'e test\'ee manuellement : les r\'eponses
+        observ\'ees sont pr\'ecises et coh\'erentes avec les sources r\'ecup\'er\'ees, ce qui
+        confirme le bon fonctionnement de bout en bout du pipeline en conditions d'utilisation
+        r\'eelle.
   \item Le d\'ep\^ot GitHub documente chaque phase (\texttt{PHASES.md}) et centralise les
         param\`etres dans \texttt{config.py}, ce qui facilite la reproductibilit\'e.
 \end{itemize}
@@ -31,9 +35,6 @@
   \item \textbf{Corpus en anglais} : le syst\`eme r\'epond en anglais et ne couvre que le contenu
         des articles t\'el\'echarg\'es ; il ne refl\`ete pas les avanc\'ees post\'erieures au
         t\'el\'echargement.
-  \item \textbf{Interface Streamlit} : impl\'ement\'ee avec des fonctionnalit\'es avanc\'es
-        (\'evaluation int\'egr\'ee, gestion du corpus), mais sa validation utilisateur finale et
-        la pr\'eparation de la d\'emonstration orale restent en cours au moment de la r\'edaction.
   \item \textbf{Pas de re-ranking} : la recherche vectorielle seule ne desambiguise pas les
         articles tr\`es proches ; un cross-encoder ou un filtrage par m\'etadonn\'ees pourrait
         am\'eliorer la precision.
@@ -43,6 +44,6 @@
 
 Le projet respecte les exigences principales du sujet : corpus $\geq$30 documents, index
 vectoriel, pipeline RAG avec LLM, interface (CLI + Streamlit), jeu de test $\geq$20 questions,
-m\'etriques demand\'ees et graphiques de performance. Les parties encore en cours (tests Streamlit,
-README final, d\'emo) sont explicitement signal\'ees et n'invalident pas les r\'esultats
-d'\'evaluation obtenus sur le pipeline principal.
+m\'etriques demand\'ees et graphiques de performance. La documentation
+(\texttt{README.md}) et le script de d\'emonstration (\texttt{DEMO.md}) sont pr\^ets pour la
+soutenance orale.

@@ -42,12 +42,13 @@ Do not start a phase until the previous one is checked off.
   learning?" — correct answer grounded in the "Attention (machine learning)"
   article.
 
-- [~] **Phase 4 — Streamlit interface**
+- [x] **Phase 4 — Streamlit interface**
   Minimal UI (`app.py`): text box for the question, shows the answer and the
   retrieved source chunks/documents.
-  Result: `app.py` implemented with three tabs (Chat, Evaluation, Corpus
-  Management), sidebar controls (LLM model, top-k, similarity threshold). Final
-  user testing and demo preparation still in progress.
+  Result: `app.py` with three tabs (Chat, Evaluation, Corpus Management) and
+  sidebar controls (LLM model, top-k, similarity threshold). Validated via
+  `streamlit run app.py` — Chat tab returns accurate, source-grounded answers
+  on NLP/ML concept questions.
 
 - [x] **Phase 5 — Evaluation dataset & metrics**
   `evaluation/eval_questions.json`: ≥20 questions with the expected source
@@ -75,6 +76,8 @@ Do not start a phase until the previous one is checked off.
   section, architecture diagram, evaluation figures, code appendices, GitHub
   link). Legacy ReportLab generator kept in `report/generate_report.py`.
 
-- [ ] **Phase 8 — Final review & demo prep**
+- [x] **Phase 8 — Final review & demo prep**
   Update `README.md` with setup/run instructions, clean up any leftover files,
   final commit, and prepare a short demo script for the oral defense.
+  Result: `README.md` updated with full setup, usage, evaluation, and report
+  instructions; `DEMO.md` added as step-by-step oral defense script (15 June 2026).
