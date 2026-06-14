@@ -9,11 +9,15 @@ Do not start a phase until the previous one is checked off.
   articles into `data/raw/`; `config.py` with shared params; `.env` with
   `GROQ_API_KEY`; deps in `requirements.txt`.
 
-- [ ] **Phase 1 — Clean & chunk the corpus**
+- [x] **Phase 1 — Clean & chunk the corpus**
   Drop disambiguation pages, strip Wikipedia boilerplate, split remaining docs
   into overlapping chunks (`CHUNK_SIZE`/`CHUNK_OVERLAP` from `config.py`).
   Output: `data/processed/chunks.jsonl` (one chunk per line: id, source doc,
   text). Script: `src/prepare_data.py`.
+  Result: dropped 2 disambiguation pages (BM25, Tokenization), cleaned the
+  remaining 34 docs (stripped "See also/References/Notes/External links"
+  sections), produced 1443 chunks of 512 chars (50 overlap) in
+  `data/processed/chunks.jsonl`.
 
 - [ ] **Phase 2 — Build the vector index**
   Embed every chunk with `all-MiniLM-L6-v2` and store in a persistent ChromaDB
