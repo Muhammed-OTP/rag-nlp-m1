@@ -19,9 +19,14 @@ Do not start a phase until the previous one is checked off.
   sections), produced 1443 chunks of 512 chars (50 overlap) in
   `data/processed/chunks.jsonl`.
 
-- [ ] **Phase 2 — Build the vector index**
+- [x] **Phase 2 — Build the vector index**
   Embed every chunk with `all-MiniLM-L6-v2` and store in a persistent ChromaDB
   collection (`chroma_db/`). Script: `src/build_index.py`.
+  Result: embedded all 1443 chunks with `all-MiniLM-L6-v2` and stored them in
+  a persistent ChromaDB collection `nlp_corpus` at `chroma_db/` (gitignored,
+  rebuilt by running `src/build_index.py`). Sanity-checked with a sample
+  query ("What is attention in machine learning?") which correctly retrieved
+  chunks from the "Attention (machine learning)" article.
 
 - [ ] **Phase 3 — RAG pipeline (retriever + LLM)**
   Given a question: embed it, retrieve top-k chunks from Chroma, fill a prompt
