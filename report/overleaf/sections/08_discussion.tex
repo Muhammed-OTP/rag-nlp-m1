@@ -1,0 +1,48 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Points forts}
+
+\begin{itemize}
+  \item Le pipeline principal (collecte, indexation, RAG CLI) est \textbf{fonctionnel de bout en
+        bout} et produit des r\'eponses ancr\'ees dans les sources Wikipedia du domaine NLP/ML.
+  \item Les r\'esultats d'\'evaluation montrent un \textbf{recall@3 moyen de 0.985} et une
+        \textbf{precision@3 moyenne de 0.922} : le retriever bas\'e sur \texttt{all-MiniLM-L6-v2}
+        retrouve quasi syst\'ematiquement le bon document, m\^eme pour des formulations diff\'erentes
+        du texte source.
+  \item La \textbf{fid\'elit\'e moyenne de 0.887} et le prompt restrictif limitent les
+        hallucinations dans la majorit\'e des cas observ\'es.
+  \item Le \textbf{temps de r\'eponse moyen de 0.81~s} rend le syst\`eme utilisable de mani\`ere
+        interactive via le CLI (et, une fois valid\'ee, via Streamlit).
+  \item Le d\'ep\^ot GitHub documente chaque phase (\texttt{PHASES.md}) et centralise les
+        param\`etres dans \texttt{config.py}, ce qui facilite la reproductibilit\'e.
+\end{itemize}
+
+\subsection{Limites et travail en cours}
+
+\begin{itemize}
+  \item \textbf{Documents voisins} : pour des sujets proches (FastText / Word2vec, sentence
+        embedding / BERT), le retriever renvoie parfois des chunks pertinents s\'emantiquement mais
+        issus d'un document diff\'erent de celui marqu\'e comme ``attendu'', ce qui p\'enalise la
+        precision@3 sans invalider la qualit\'e de la r\'eponse.
+  \item \textbf{M\'etrique de fid\'elit\'e lexicale} : elle ne d\'etecte ni les reformulations
+        correctes (synonymes) ni les hallucinations subtiles r\'eutilisant le vocabulaire du
+        contexte. Une \'evaluation par LLM-as-judge serait plus fine mais plus co\^uteuse.
+  \item \textbf{Corpus en anglais} : le syst\`eme r\'epond en anglais et ne couvre que le contenu
+        des articles t\'el\'echarg\'es ; il ne refl\`ete pas les avanc\'ees post\'erieures au
+        t\'el\'echargement.
+  \item \textbf{Interface Streamlit} : impl\'ement\'ee avec des fonctionnalit\'es avanc\'es
+        (\'evaluation int\'egr\'ee, gestion du corpus), mais sa validation utilisateur finale et
+        la pr\'eparation de la d\'emonstration orale restent en cours au moment de la r\'edaction.
+  \item \textbf{Pas de re-ranking} : la recherche vectorielle seule ne desambiguise pas les
+        articles tr\`es proches ; un cross-encoder ou un filtrage par m\'etadonn\'ees pourrait
+        am\'eliorer la precision.
+\end{itemize}
+
+\subsection{Alignement avec le sujet du projet}
+
+Le projet respecte les exigences principales du sujet : corpus $\geq$30 documents, index
+vectoriel, pipeline RAG avec LLM, interface (CLI + Streamlit), jeu de test $\geq$20 questions,
+m\'etriques demand\'ees et graphiques de performance. Les parties encore en cours (tests Streamlit,
+README final, d\'emo) sont explicitement signal\'ees et n'invalident pas les r\'esultats
+d'\'evaluation obtenus sur le pipeline principal.

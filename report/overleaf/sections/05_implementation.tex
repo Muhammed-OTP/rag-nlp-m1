@@ -1,0 +1,87 @@
+\section{Impl\'ementation}
+\label{sec:impl}
+
+\subsection{Choix techniques}
+
+Les choix techniques sont r\'esum\'es dans le tableau~\ref{tab:tech}. Tous les param\`etres
+num\'eriques proviennent de \texttt{config.py}.
+
+\begin{table}[H]
+  \centering
+  \caption{Choix techniques et justifications.}
+  \label{tab:tech}
+  \small
+  \begin{tabular}{@{}p{2.4cm}p{3.2cm}p{7.8cm}@{}}
+    \toprule
+    \textbf{Composant} & \textbf{Choix} & \textbf{Justification} \\
+    \midrule
+    Langage & Python 3.13 & \'Ecosyst\`eme NLP mature (sentence-transformers, ChromaDB, Streamlit). \\
+    Embeddings & all-MiniLM-L6-v2 & Mod\`ele compact ($\sim$80~Mo), rapide en CPU, adapt\'e \`a la recherche s\'emantique. \\
+    Base vectorielle & ChromaDB (persistant) & Int\'egration simple, pas de serveur externe, persistance locale. \\
+    LLM & Groq --- llama-3.3-70b-versatile & API rapide, mod\`ele open-weight performant. \\
+    Interface & Streamlit + CLI & CLI pour le d\'eveloppement ; Streamlit pour la d\'emo interactive. \\
+    D\'ecoupage & 512 / overlap 50 & Compromis granularit\'e / contexte par chunk. \\
+    Top-k & 3 & Suffisant pour couvrir la r\'eponse sans diluer le contexte. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Pipeline de r\'ecup\'eration et de g\'en\'eration}
+
+Le module \texttt{src/rag\_pipeline.py} impl\'emente les fonctions centrales :
+\begin{itemize}[noitemsep]
+  \item \texttt{retrieve()} : encode la question et interroge ChromaDB ;
+  \item \texttt{build\_prompt()} : assemble le contexte r\'ecup\'er\'e et la question ;
+  \item \texttt{generate\_answer()} : appelle le LLM Groq et retourne la r\'eponse ainsi que
+        les chunks sources.
+\end{itemize}
+
+Le template de prompt demande explicitement au mod\`ele de r\'epondre \textbf{uniquement} \`a partir
+du contexte fourni et d'indiquer s'il ne conna\^it pas la r\'eponse, afin de limiter les
+hallucinations. Un extrait est donn\'e en annexe~\ref{ann:code}.
+
+\subsection{Interface utilisateur}
+
+\subsubsection{Ligne de commande (op\'erationnelle)}
+
+La commande \texttt{python -m src.rag\_pipeline} lance une boucle interactive : l'utilisateur
+pose une question, le syst\`eme affiche la r\'eponse et les documents sources. Cette interface
+a servi de base pour valider le pipeline avant l'\'evaluation automatique.
+
+\subsubsection{Streamlit (impl\'ement\'ee, validation en cours)}
+
+L'application \texttt{app.py} organise l'interface en trois onglets :
+\begin{itemize}[noitemsep]
+  \item \textbf{Chat} : conversation avec affichage du temps de r\'eponse, des chunks utilis\'es,
+        d'un score de fid\'elit\'e et des extraits sources ;
+  \item \textbf{\'Evaluation} : chargement d'un jeu de questions (JSON/CSV), lancement de
+        l'\'evaluation, m\'etriques agr\'eg\'ees, graphiques Plotly et export CSV/PDF ;
+  \item \textbf{Gestion du corpus} : statistiques, ajout de documents (PDF/TXT), s\'election des
+        sources et reconstruction de l'index vectoriel.
+\end{itemize}
+
+La barre lat\'erale permet de choisir le mod\`ele LLM Groq, d'ajuster \texttt{top-k} et le seuil
+de similarit\'e. Les tests finaux de cette interface et la pr\'eparation de la d\'emonstration
+orale constituent le travail restant identifi\'e en section~\ref{sec:etat}.
+
+\subsection{Scripts principaux}
+
+\begin{table}[H]
+  \centering
+  \caption{Scripts du projet et r\^ole.}
+  \label{tab:scripts}
+  \small
+  \begin{tabular}{@{}p{4.5cm}p{9cm}@{}}
+    \toprule
+    \textbf{Fichier} & \textbf{R\^ole} \\
+    \midrule
+    \texttt{collect\_corpus.py} & T\'el\'echargement des articles Wikipedia \\
+    \texttt{src/prepare\_data.py} & Nettoyage et chunking \\
+    \texttt{src/build\_index.py} & Embeddings et index ChromaDB \\
+    \texttt{src/rag\_pipeline.py} & R\'ecup\'eration + g\'en\'eration (CLI) \\
+    \texttt{app.py} & Interface Streamlit \\
+    \texttt{evaluation/evaluate.py} & \'Evaluation batch sur le jeu de test \\
+    \texttt{visualizations/plot\_results.py} & G\'en\'eration des graphiques \\
+    \bottomrule
+  \end{tabular}
+\end{table}

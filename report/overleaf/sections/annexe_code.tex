@@ -1,0 +1,60 @@
+\section{Extraits de code}
+\label{ann:code}
+
+\subsection{Template de prompt (\texttt{src/rag\_pipeline.py})}
+
+\begin{lstlisting}[style=python,caption={Template de prompt limitant les hallucinations.}]
+PROMPT_TEMPLATE = """Answer the question using only the context below. \
+If the context does not contain the answer, say you don't know.
+
+Context:
+{context}
+
+Question: {question}
+
+Answer:"""
+\end{lstlisting}
+
+\subsection{Fonction de r\'ecup\'eration}
+
+\begin{lstlisting}[style=python,caption={R\'ecup\'eration des top-k chunks depuis ChromaDB.}]
+def retrieve(question, model, collection, top_k=TOP_K):
+    query_embedding = model.encode([question])
+    results = collection.query(
+        query_embeddings=query_embedding.tolist(),
+        n_results=top_k,
+    )
+    chunks = []
+    for chunk_id, text, meta in zip(
+        results["ids"][0],
+        results["documents"][0],
+        results["metadatas"][0],
+    ):
+        chunks.append({
+            "id": chunk_id,
+            "text": text,
+            "source": meta["source"],
+        })
+    return chunks
+\end{lstlisting}
+
+\subsection{Calcul de la fid\'elit\'e (\texttt{evaluation/evaluate.py})}
+
+\begin{lstlisting}[style=python,caption={Recouvrement lexical entre reponse et contexte.}]
+def lexical_overlap(answer: str, context: str) -> float:
+    answer_tokens = set(re.findall(r"\w+", answer.lower()))
+    context_tokens = set(re.findall(r"\w+", context.lower()))
+    if not answer_tokens:
+        return 0.0
+    return len(answer_tokens & context_tokens) / len(answer_tokens)
+\end{lstlisting}
+
+\subsection{Param\`etres partag\'es (\texttt{config.py})}
+
+\begin{lstlisting}[style=python,caption={Constantes centralisees du projet.}]
+CHUNK_SIZE = 512
+CHUNK_OVERLAP = 50
+EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+TOP_K = 3
+GROQ_MODEL = "llama-3.3-70b-versatile"
+\end{lstlisting}

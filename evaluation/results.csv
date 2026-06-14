@@ -1,0 +1,35 @@
+question,expected_sources,retrieved_sources,precision@3,recall@3,faithfulness,response_time_s
+What is the attention mechanism used for in machine learning?,Attention (machine learning),Attention (machine learning); Transformer (machine learning); Attention (machine learning),0.667,1.0,0.9,1.188
+What does BERT stand for and what is it used for?,BERT (language model),BERT (language model); BERT (language model); BERT (language model),1.0,1.0,0.484,0.452
+What does the BLEU score measure?,BLEU,BLEU; BLEU; BLEU,1.0,1.0,0.778,0.392
+How does the bag-of-words model represent text?,Bag-of-words model,Bag-of-words model; Bag-of-words model; Bag-of-words model,1.0,1.0,0.885,0.406
+How is cosine similarity computed and what does it measure?,Cosine similarity,Cosine similarity; Cosine similarity; Cosine similarity,1.0,1.0,0.857,0.404
+What is FastText and how does it differ from earlier word embedding methods?,FastText,FastText; Word2vec; BERT (language model),0.333,1.0,0.789,0.692
+What is fine-tuning in deep learning?,Fine-tuning (deep learning),Fine-tuning (deep learning); Fine-tuning (deep learning); Fine-tuning (deep learning),1.0,1.0,1.0,0.357
+What is GPT and what architecture is it based on?,GPT (language model),GPT (language model); GPT (language model); GPT (language model),1.0,1.0,0.955,0.632
+What is GloVe and how are its word vectors trained?,GloVe (machine learning),GloVe (machine learning); GloVe (machine learning); Word2vec,0.667,1.0,0.976,0.378
+What is hallucination in the context of artificial intelligence?,Hallucination (artificial intelligence),Hallucination (artificial intelligence); Hallucination (artificial intelligence); Hallucination (artificial intelligence),1.0,1.0,0.913,0.35
+What is information retrieval?,Information retrieval,Information retrieval; Information retrieval; Information retrieval,1.0,1.0,1.0,0.395
+What is LangChain used for when building applications with language models?,LangChain,LangChain; LangChain; LangChain,1.0,1.0,0.921,0.573
+What is lemmatization and how does it differ from stemming?,Lemmatization; Stemming,Lemmatization; Lemmatization; Lemmatization,1.0,0.5,0.824,0.629
+What problem do long short-term memory networks solve compared to standard recurrent neural networks?,Long short-term memory; Recurrent neural network,Long short-term memory; Recurrent neural network; Recurrent neural network,1.0,1.0,1.0,0.548
+What is an n-gram and how is it used in language modeling?,N-gram,N-gram; N-gram; N-gram,1.0,1.0,0.818,0.921
+What is named-entity recognition?,Named-entity recognition,Named-entity recognition; Named-entity recognition; Named-entity recognition,1.0,1.0,1.0,0.314
+What does perplexity measure in natural language processing?,Perplexity (natural language processing),Perplexity (natural language processing); Perplexity (natural language processing); Perplexity (natural language processing),1.0,1.0,0.773,0.423
+What is question answering in computing?,Question answering (computing),Question answering (computing); Question answering (computing); Question answering (computing),1.0,1.0,1.0,0.381
+What does the ROUGE metric evaluate?,ROUGE (metric),ROUGE (metric); ROUGE (metric); Cosine similarity,0.667,1.0,0.92,0.394
+How does a recurrent neural network process sequential data?,Recurrent neural network,Recurrent neural network; Recurrent neural network; Recurrent neural network,1.0,1.0,0.889,0.677
+What is retrieval-augmented generation and what problem does it address?,Retrieval-augmented generation,Retrieval-augmented generation; Retrieval-augmented generation; Retrieval-augmented generation,1.0,1.0,0.776,0.716
+What is a sentence embedding used for?,Sentence embedding,Sentence embedding; Sentence embedding; BERT (language model),0.667,1.0,0.857,0.327
+What is sentiment analysis and what are its main approaches?,Sentiment analysis,Sentiment analysis; Sentiment analysis; Sentiment analysis,1.0,1.0,0.816,0.535
+What is a sequence-to-sequence (seq2seq) model used for?,Seq2seq,Seq2seq; Seq2seq; Transformer (machine learning),0.667,1.0,0.889,0.376
+What is stemming in natural language processing?,Stemming,Stemming; Stemming; Stemming,1.0,1.0,1.0,0.394
+What are stop words and why are they often removed during text preprocessing?,Stop word,Stop word; Stop word; Stop word,1.0,1.0,0.92,0.476
+What does TF-IDF stand for and how is it computed?,TF-IDF,TF-IDF; TF-IDF; TF-IDF,1.0,1.0,0.773,0.573
+What is text classification and what are some common applications?,Text classification,Text classification; Text classification; Text classification,1.0,1.0,0.723,0.938
+What is text segmentation?,Text segmentation,Text segmentation; Text segmentation; Text segmentation,1.0,1.0,1.0,0.374
+What is tokenization in natural language processing?,Tokenization (lexical analysis),Tokenization (lexical analysis); Tokenization (lexical analysis); Tokenization (lexical analysis),1.0,1.0,0.964,0.413
+What is transfer learning and why is it useful in deep learning?,Transfer learning,Transfer learning; Transfer learning; Fine-tuning (deep learning),0.667,1.0,0.873,2.759
+What is the transformer architecture and why was it introduced?,Transformer (machine learning),Transformer (machine learning); Transformer (machine learning); Transformer (machine learning),1.0,1.0,0.97,3.045
+What is a vector database used for?,Vector database,Vector database; Vector database; Vector database,1.0,1.0,0.974,2.574
+What is Word2vec and how does it learn word representations?,Word2vec,Word2vec; Word2vec; Word2vec,1.0,1.0,0.931,3.567

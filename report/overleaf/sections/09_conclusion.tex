@@ -1,0 +1,28 @@
+\section{Conclusion et perspectives}
+\label{sec:conclusion}
+
+Ce projet a permis de mettre en \oe uvre l'essentiel de la cha\^ine d'un syst\`eme RAG appliqu\'e
+aux concepts NLP/ML : constitution d'un corpus Wikipedia, pr\'eparation des donn\'ees, indexation
+vectorielle avec ChromaDB, pipeline de r\'ecup\'eration et de g\'en\'eration via Groq, \'evaluation
+quantitative sur 34 questions et visualisation des performances.
+
+Les r\'esultats obtenus (precision@3 = 0.922, recall@3 = 0.985, fid\'elit\'e = 0.887, temps
+moyen = 0.811~s) montrent que le syst\`eme r\'epond de mani\`ere pertinente et rapide sur
+l'ensemble du corpus choisi. Le rapport pr\'esente honn\^etement l'\textbf{\'etat d'avancement} :
+le c\oe ur technique et l'\'evaluation sont termin\'es ; la finalisation de l'interface Streamlit
+et la pr\'eparation de la soutenance du 15 juin 2026 constituent les prochaines \'etapes
+imm\'ediates.
+
+\subsection{Perspectives}
+
+\begin{itemize}[noitemsep]
+  \item Finaliser les tests Streamlit et pr\'eparer un sc\'enario de d\'emonstration reproductible.
+  \item Remplacer la m\'etrique de fid\'elit\'e lexicale par une approche LLM-as-judge.
+  \item Ajouter un re-ranking (cross-encoder) pour am\'eliorer la precision sur les sujets
+        recouvrants.
+  \item \'Etendre le corpus (sources r\'ecentes, contenu multilingue).
+  \item Permettre la citation explicite des sources dans le texte de la r\'eponse g\'en\'er\'ee.
+\end{itemize}
+
+Le code source, les scripts d'\'evaluation et ce rapport LaTeX sont disponibles sur le d\'ep\^ot :
+\url{https://github.com/Muhammed-OTP/rag-nlp-m1}.

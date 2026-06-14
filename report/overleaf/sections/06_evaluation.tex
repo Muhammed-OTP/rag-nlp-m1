@@ -1,0 +1,50 @@
+\section{M\'ethodologie d'\'evaluation}
+\label{sec:methode}
+
+\subsection{Jeu de questions}
+
+Un jeu de \textbf{34 questions} a \'et\'e constitu\'e manuellement
+(\texttt{evaluation/eval\_questions.json}), couvrant l'ensemble des 34 documents du corpus ---
+une question par concept, plus quelques questions \`a sources multiples lorsque les notions sont
+\'etroitement li\'ees (par exemple lemmatisation / stemmatisation, ou LSTM / RNN). Ce jeu d\'epasse
+le minimum de 20 questions exig\'e par le sujet du projet.
+
+Chaque entr\'ee contient :
+\begin{itemize}[noitemsep]
+  \item la \textbf{question} en anglais (langue du corpus) ;
+  \item la liste des \textbf{documents attendus} (\texttt{expected\_sources}).
+\end{itemize}
+
+\subsection{M\'etriques calcul\'ees}
+
+Pour chaque question, le script \texttt{evaluation/evaluate.py} ex\'ecute le pipeline complet
+(r\'ecup\'eration + g\'en\'eration) et calcule quatre m\'etriques :
+
+\begin{description}
+  \item[Precision@3] Proportion des 3 chunks r\'ecup\'er\'es qui appartiennent au(x) document(s)
+        attendu(s). Mesure la pr\'ecision du retriever.
+  \item[Recall@3] Proportion des documents attendus pr\'esents parmi les chunks r\'ecup\'er\'es.
+        Indique si l'information n\'ecessaire a \'et\'e retrouv\'ee.
+  \item[Fid\'elit\'e (faithfulness)] Proportion des mots de la r\'eponse g\'en\'er\'ee qui
+        apparaissent \'egalement dans le contexte r\'ecup\'er\'e --- mesure lexicale simple de
+        l'ancrage de la r\'eponse dans les sources (proxy de l'absence d'hallucination).
+  \item[Temps de r\'eponse] Dur\'ee totale (secondes) incluant l'encodage de la question, la
+        recherche vectorielle et l'appel \`a l'API Groq.
+\end{description}
+
+Les r\'esultats d\'etaill\'es (une ligne par question) sont sauvegard\'es dans
+\texttt{evaluation/results.csv}. Les graphiques de la section~\ref{sec:resultats} sont produits
+par \texttt{visualizations/plot\_results.py} \`a partir de ce fichier.
+
+\subsection{Reproductibilit\'e}
+
+Pour reproduire l'\'evaluation :
+\begin{enumerate}[noitemsep]
+  \item Construire l'index : \texttt{python -m src.build\_index}
+  \item Configurer \texttt{GROQ\_API\_KEY} dans un fichier \texttt{.env}
+  \item Lancer : \texttt{python -m evaluation.evaluate}
+  \item G\'en\'erer les figures : \texttt{python -m visualizations.plot\_results}
+\end{enumerate}
+
+Les r\'esultats pr\'esent\'es dans ce rapport proviennent d'une ex\'ecution compl\`ete de cette
+cha\^ine sur la machine de d\'eveloppement (juin 2026).

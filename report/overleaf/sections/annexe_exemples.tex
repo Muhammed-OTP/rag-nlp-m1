@@ -1,0 +1,63 @@
+\section{Exemples question-r\'eponse}
+\label{ann:exemples}
+
+Les exemples suivants proviennent de l'ex\'ecution du pipeline sur le jeu d'\'evaluation
+(\texttt{evaluation/results.csv}). Ils illustrent un cas \`a haute performance et un cas o\`u la
+precision@3 est p\'enalis\'ee par la proximit\'e s\'emantique entre documents voisins.
+
+\subsection{Exemple 1 --- Performance \'elev\'ee}
+
+\textbf{Question :} \emph{What is retrieval-augmented generation and what problem does it address?}
+
+\textbf{Sources attendues :} Retrieval-augmented generation
+
+\textbf{Sources r\'ecup\'er\'ees :} Retrieval-augmented generation (x3)
+
+\textbf{M\'etriques :} Precision@3 = 1.0, Recall@3 = 1.0, Fid\'elit\'e = 0.776, Temps = 0.716~s
+
+\textbf{Interpr\'etation :} les trois chunks proviennent du bon article ; le retriever et le LLM
+produisent une r\'eponse directement ancr\'ee dans la d\'efinition Wikipedia du RAG.
+
+\subsection{Exemple 2 --- Documents voisins}
+
+\textbf{Question :} \emph{What is FastText and how does it differ from earlier word embedding methods?}
+
+\textbf{Sources attendues :} FastText
+
+\textbf{Sources r\'ecup\'er\'ees :} FastText; Word2vec; BERT (language model)
+
+\textbf{M\'etriques :} Precision@3 = 0.333, Recall@3 = 1.0, Fid\'elit\'e = 0.789, Temps = 0.692~s
+
+\textbf{Interpr\'etation :} le chunk principal est correct (FastText), mais les deux suivants
+proviennent d'articles li\'es aux embeddings (Word2vec, BERT). La r\'eponse reste pertinente pour
+l'utilisateur, mais la m\'etrique precision@3 est p\'enalis\'ee car seul un chunk sur trois
+correspond au document ``gold'' d\'efini manuellement.
+
+\subsection{Exemple 3 --- Recall partiel (sources multiples)}
+
+\textbf{Question :} \emph{What is lemmatization and how does it differ from stemming?}
+
+\textbf{Sources attendues :} Lemmatization; Stemming
+
+\textbf{Sources r\'ecup\'er\'ees :} Lemmatization (x3)
+
+\textbf{M\'etriques :} Precision@3 = 1.0, Recall@3 = 0.5, Fid\'elit\'e = 0.824, Temps = 0.629~s
+
+\textbf{Interpr\'etation :} tous les chunks proviennent de l'article sur la lemmatisation, mais
+l'article sur le \emph{stemming} n'appara\^it pas dans le top-3 ; le recall@3 est donc de 0.5
+alors que la r\'eponse peut n\'eanmoins mentionner les deux notions via le contenu du chunk
+r\'ecup\'er\'e.
+
+\subsection{Lancement du CLI}
+
+\begin{lstlisting}[style=python,caption={Commande pour interroger le systeme en ligne de commande.}]
+# Apres construction de l'index et configuration de .env
+python -m src.rag_pipeline
+
+# Exemple de question interactive :
+# > What is the transformer architecture and why was it introduced?
+\end{lstlisting}
+
+\begin{lstlisting}[style=python,caption={Lancement de l'interface Streamlit.}]
+streamlit run app.py
+\end{lstlisting}

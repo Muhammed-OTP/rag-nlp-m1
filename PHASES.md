@@ -42,25 +42,38 @@ Do not start a phase until the previous one is checked off.
   learning?" — correct answer grounded in the "Attention (machine learning)"
   article.
 
-- [ ] **Phase 4 — Streamlit interface**
+- [~] **Phase 4 — Streamlit interface**
   Minimal UI (`app.py`): text box for the question, shows the answer and the
   retrieved source chunks/documents.
+  Result: `app.py` implemented with three tabs (Chat, Evaluation, Corpus
+  Management), sidebar controls (LLM model, top-k, similarity threshold). Final
+  user testing and demo preparation still in progress.
 
-- [ ] **Phase 5 — Evaluation dataset & metrics**
+- [x] **Phase 5 — Evaluation dataset & metrics**
   `evaluation/eval_questions.json`: ≥20 questions with the expected source
   document(s) per question. `evaluation/evaluate.py`: runs the pipeline on all
   questions, computes Precision@k, Recall@k, a faithfulness score, and response
   time; saves results to `evaluation/results.csv`.
+  Result: 34-question test set in `eval_questions.json`; batch evaluation in
+  `evaluate.py` produced `results.csv` (mean precision@3=0.922, recall@3=0.985,
+  faithfulness=0.887, response time=0.811 s).
 
-- [ ] **Phase 6 — Visualizations**
+- [x] **Phase 6 — Visualizations**
   `visualizations/plot_results.py`: reads `evaluation/results.csv` and produces
   PNG charts (precision/recall, response time distribution, etc.) saved to
   `visualizations/`.
+  Result: five PNG charts generated (`average_metrics.png`,
+  `precision_recall_per_question.png`, `faithfulness_distribution.png`,
+  `response_time_distribution.png`, `time_vs_faithfulness.png`); copies in
+  `report/overleaf/figures/` for the LaTeX report.
 
-- [ ] **Phase 7 — Report**
+- [x] **Phase 7 — Report**
   Write the PDF report (≥10 pages: intro, architecture, data, implementation,
   evaluation + graphs, discussion, conclusion, references) using the real
   results from Phases 5-6.
+  Result: LaTeX/Overleaf report in `report/overleaf/` (French, honest progress
+  section, architecture diagram, evaluation figures, code appendices, GitHub
+  link). Legacy ReportLab generator kept in `report/generate_report.py`.
 
 - [ ] **Phase 8 — Final review & demo prep**
   Update `README.md` with setup/run instructions, clean up any leftover files,

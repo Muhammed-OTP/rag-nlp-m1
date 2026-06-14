@@ -1,0 +1,138 @@
+[
+  {
+    "question": "What is the attention mechanism used for in machine learning?",
+    "expected_sources": ["Attention (machine learning)"]
+  },
+  {
+    "question": "What does BERT stand for and what is it used for?",
+    "expected_sources": ["BERT (language model)"]
+  },
+  {
+    "question": "What does the BLEU score measure?",
+    "expected_sources": ["BLEU"]
+  },
+  {
+    "question": "How does the bag-of-words model represent text?",
+    "expected_sources": ["Bag-of-words model"]
+  },
+  {
+    "question": "How is cosine similarity computed and what does it measure?",
+    "expected_sources": ["Cosine similarity"]
+  },
+  {
+    "question": "What is FastText and how does it differ from earlier word embedding methods?",
+    "expected_sources": ["FastText"]
+  },
+  {
+    "question": "What is fine-tuning in deep learning?",
+    "expected_sources": ["Fine-tuning (deep learning)"]
+  },
+  {
+    "question": "What is GPT and what architecture is it based on?",
+    "expected_sources": ["GPT (language model)"]
+  },
+  {
+    "question": "What is GloVe and how are its word vectors trained?",
+    "expected_sources": ["GloVe (machine learning)"]
+  },
+  {
+    "question": "What is hallucination in the context of artificial intelligence?",
+    "expected_sources": ["Hallucination (artificial intelligence)"]
+  },
+  {
+    "question": "What is information retrieval?",
+    "expected_sources": ["Information retrieval"]
+  },
+  {
+    "question": "What is LangChain used for when building applications with language models?",
+    "expected_sources": ["LangChain"]
+  },
+  {
+    "question": "What is lemmatization and how does it differ from stemming?",
+    "expected_sources": ["Lemmatization", "Stemming"]
+  },
+  {
+    "question": "What problem do long short-term memory networks solve compared to standard recurrent neural networks?",
+    "expected_sources": ["Long short-term memory", "Recurrent neural network"]
+  },
+  {
+    "question": "What is an n-gram and how is it used in language modeling?",
+    "expected_sources": ["N-gram"]
+  },
+  {
+    "question": "What is named-entity recognition?",
+    "expected_sources": ["Named-entity recognition"]
+  },
+  {
+    "question": "What does perplexity measure in natural language processing?",
+    "expected_sources": ["Perplexity (natural language processing)"]
+  },
+  {
+    "question": "What is question answering in computing?",
+    "expected_sources": ["Question answering (computing)"]
+  },
+  {
+    "question": "What does the ROUGE metric evaluate?",
+    "expected_sources": ["ROUGE (metric)"]
+  },
+  {
+    "question": "How does a recurrent neural network process sequential data?",
+    "expected_sources": ["Recurrent neural network"]
+  },
+  {
+    "question": "What is retrieval-augmented generation and what problem does it address?",
+    "expected_sources": ["Retrieval-augmented generation"]
+  },
+  {
+    "question": "What is a sentence embedding used for?",
+    "expected_sources": ["Sentence embedding"]
+  },
+  {
+    "question": "What is sentiment analysis and what are its main approaches?",
+    "expected_sources": ["Sentiment analysis"]
+  },
+  {
+    "question": "What is a sequence-to-sequence (seq2seq) model used for?",
+    "expected_sources": ["Seq2seq"]
+  },
+  {
+    "question": "What is stemming in natural language processing?",
+    "expected_sources": ["Stemming"]
+  },
+  {
+    "question": "What are stop words and why are they often removed during text preprocessing?",
+    "expected_sources": ["Stop word"]
+  },
+  {
+    "question": "What does TF-IDF stand for and how is it computed?",
+    "expected_sources": ["TF-IDF"]
+  },
+  {
+    "question": "What is text classification and what are some common applications?",
+    "expected_sources": ["Text classification"]
+  },
+  {
+    "question": "What is text segmentation?",
+    "expected_sources": ["Text segmentation"]
+  },
+  {
+    "question": "What is tokenization in natural language processing?",
+    "expected_sources": ["Tokenization (lexical analysis)"]
+  },
+  {
+    "question": "What is transfer learning and why is it useful in deep learning?",
+    "expected_sources": ["Transfer learning"]
+  },
+  {
+    "question": "What is the transformer architecture and why was it introduced?",
+    "expected_sources": ["Transformer (machine learning)"]
+  },
+  {
+    "question": "What is a vector database used for?",
+    "expected_sources": ["Vector database"]
+  },
+  {
+    "question": "What is Word2vec and how does it learn word representations?",
+    "expected_sources": ["Word2vec"]
+  }
+]

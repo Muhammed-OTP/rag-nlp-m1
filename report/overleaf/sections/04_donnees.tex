@@ -1,0 +1,64 @@
+\section{Donn\'ees et pr\'eparation du corpus}
+\label{sec:donnees}
+
+\subsection{Source et contenu}
+
+Le corpus est constitu\'e de \textbf{36 articles Wikipedia en anglais}, couvrant les principaux
+concepts du NLP et du machine learning abord\'es dans le module (mod\`eles de langage, embeddings,
+architectures neuronales, m\'etriques d'\'evaluation, etc.). Les articles sont t\'el\'echarg\'es
+automatiquement avec la biblioth\`eque \texttt{wikipedia} et sauvegard\'es en texte brut dans
+\texttt{data/raw/}.
+
+\subsection{Nettoyage}
+
+Deux articles se sont r\'ev\'el\'es \`etre des pages d'homonymie (\emph{BM25} et
+\emph{Tokenization}) sans contenu encyclop\'edique exploitable ; ils ont \'et\'e \'ecart\'es. Le
+sujet de la tokenisation est d\'ej\`a couvert par l'article \emph{Tokenization (lexical analysis)}.
+Le corpus final compte donc \textbf{34 documents}, ce qui respecte la contrainte minimale de
+30 documents impos\'ee par le sujet.
+
+Pour chaque document conserv\'e, les sections de fin g\'en\'eriques (\emph{See also},
+\emph{References}, \emph{Notes}, \emph{External links}) sont supprim\'ees afin de ne garder que
+le contenu pertinent.
+
+\subsection{D\'ecoupage en chunks}
+
+Chaque document nettoy\'e est d\'ecoup\'e en chunks de \textbf{512 caract\`eres} avec un
+chevauchement de \textbf{50 caract\`eres} entre chunks cons\'ecutifs. Ce chevauchement limite le
+risque qu'une information importante soit coup\'ee entre deux segments et perdue lors de la
+recherche. Le d\'ecoupage produit \textbf{1443 chunks}, stock\'es au format JSON Lines dans
+\texttt{data/processed/chunks.jsonl} (identifiant, document source, texte).
+
+\subsection{Liste des documents}
+
+Le tableau~\ref{tab:corpus} liste les 34 articles utilis\'es (titres originaux en anglais).
+
+\begin{table}[H]
+  \centering
+  \caption{Articles Wikipedia du corpus (34 documents).}
+  \label{tab:corpus}
+  \small
+  \begin{tabular}{@{}p{0.46\textwidth}p{0.46\textwidth}@{}}
+    \toprule
+    \textbf{Document} & \textbf{Document} \\
+    \midrule
+    Attention (machine learning) & BERT (language model) \\
+    BLEU & Bag-of-words model \\
+    Cosine similarity & FastText \\
+    Fine-tuning (deep learning) & GPT (language model) \\
+    GloVe (machine learning) & Hallucination (artificial intelligence) \\
+    Information retrieval & LangChain \\
+    Lemmatization & Long short-term memory \\
+    N-gram & Named-entity recognition \\
+    Perplexity (natural language processing) & Question answering (computing) \\
+    ROUGE (metric) & Recurrent neural network \\
+    Retrieval-augmented generation & Sentence embedding \\
+    Sentiment analysis & Seq2seq \\
+    Stemming & Stop word \\
+    TF-IDF & Text classification \\
+    Text segmentation & Tokenization (lexical analysis) \\
+    Transfer learning & Transformer (machine learning) \\
+    Vector database & Word2vec \\
+    \bottomrule
+  \end{tabular}
+\end{table}

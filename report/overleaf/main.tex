@@ -1,0 +1,100 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+
+\geometry{margin=2.5cm}
+\hypersetup{colorlinks=true, linkcolor=blue!60!black, urlcolor=blue!70!black, citecolor=blue!60!black}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Rapport projet RAG --- NLP M1}
+\fancyhead[R]{\small Mohamed Salem Ebnou Echvagha Oubeid}
+\fancyfoot[C]{\thepage}
+
+% --- Logo: change this path in Overleaf if needed ---
+\newcommand{\UniversityLogoPath}{figures/university_logo.png}
+
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeframe}{RGB}{200,200,200}
+\lstdefinestyle{python}{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  keywordstyle=\color{blue!70!black},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal!60!black},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=8pt,
+  tabsize=4,
+}
+
+\title{%
+  \vspace{-1cm}
+  {\Large Module NLP --- Master 1, Semestre 2, 2025--2026}\\[0.8cm]
+  {\LARGE Conception d'un syst\`eme RAG}\\[0.4cm]
+  {\large Assistant question-r\'eponse sur les concepts de NLP / Machine Learning}
+}
+\author{Mohamed Salem Ebnou Echvagha Oubeid --- C34613}
+\date{Rapport de projet --- Retrieval-Augmented Generation\\[0.2cm]
+      D\'ep\^ot Git : \url{https://github.com/Muhammed-OTP/rag-nlp-m1}}
+
+\begin{document}
+
+% --- Page de garde ---
+\begin{titlepage}
+  \centering
+  \includegraphics[width=3.2cm]{\UniversityLogoPath}\\[1.2cm]
+  {\large Module NLP --- Master 1, Semestre 2, 2025--2026}\\[1.5cm]
+  {\LARGE\bfseries Conception d'un syst\`eme RAG}\\[0.5cm]
+  {\large Assistant question-r\'eponse sur les concepts de NLP / Machine Learning}\\[2cm]
+  {\large\bfseries Auteur :}\\[0.2cm]
+  Mohamed Salem Ebnou Echvagha Oubeid --- C34613\\[1.5cm]
+  {\large Domaine choisi :}\\[0.2cm]
+  Concepts fondamentaux du traitement automatique du langage naturel (NLP) et du machine learning,
+  \`a partir d'un corpus d'articles Wikipedia en anglais.\\[1.5cm]
+  {\large D\'ep\^ot GitHub :}\\[0.2cm]
+  \url{https://github.com/Muhammed-OTP/rag-nlp-m1}\\[1.5cm]
+  \today
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\input{sections/01_introduction}
+\input{sections/02_etat_avancement}
+\input{sections/03_architecture}
+\input{sections/04_donnees}
+\input{sections/05_implementation}
+\input{sections/06_evaluation}
+\input{sections/07_resultats}
+\input{sections/08_discussion}
+\input{sections/09_conclusion}
+\input{sections/10_references}
+
+\appendix
+\input{sections/annexe_code}
+\input{sections/annexe_exemples}
+
+\end{document}
