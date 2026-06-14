@@ -1,2 +1,1 @@
-# rag-nlp-m1
-A RAG system for NLP 
+# RAG (Retrieval-Augmented Generation) System
