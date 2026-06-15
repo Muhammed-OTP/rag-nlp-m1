@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG sur les concepts NLP/ML — Présentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ SVG ICON SPRITE ============ -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M8 17a5 5 0 0 1-1-9.9 5.5 5.5 0 0 1 10.6-1.3A4 4 0 0 1 17 14h-2"/><polyline points="8 12 12 8 16 12"/><line x1="12" y1="8" x2="12" y2="21"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-git" viewBox="0 0 24 24"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+  <symbol id="i-list" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M9.5 2a3.5 3.5 0 0 0-3.5 3.5v.18A3 3 0 0 0 4 8.5v1A3 3 0 0 0 2.5 12 3 3 0 0 0 4 14.5v1A3 3 0 0 0 6 18.32V18.5A3.5 3.5 0 0 0 12 21a3.5 3.5 0 0 0 6-2.5v-.18A3 3 0 0 0 20 15.5v-1A3 3 0 0 0 21.5 12 3 3 0 0 0 20 9.5v-1A3 3 0 0 0 18 5.68V5.5A3.5 3.5 0 0 0 12 3a3.5 3.5 0 0 0-2.5-1z"/><line x1="12" y1="3" x2="12" y2="21"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></symbol>
+</svg>
+
+<div class="bg-decor"></div>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="assets/logo.webp" alt="Logo Université de Nouakchott">
+    <span>RAG &mdash; Concepts NLP/ML</span>
+  </div>
+  <div class="slide-counter"><b id="slideNum">01</b> / <span id="slideTotal">15</span></div>
+</header>
+
+<main class="deck" id="deck">
+
+  <!-- ===================== SLIDE 1 — TITLE ===================== -->
+  <section class="slide slide-title">
+    <div class="slide-body" style="justify-content:center;">
+      <div class="reveal logo-badge"><img src="assets/logo.webp" alt="Université de Nouakchott"></div>
+      <div class="reveal slide-eyebrow" style="justify-content:center;">
+        <svg class="icon"><use href="#i-brain"/></svg>
+        Projet — Module NLP — M1
+      </div>
+      <h1 class="reveal">Système <span class="accent">RAG</span><br>sur les concepts NLP / ML</h1>
+      <p class="reveal subtitle">
+        Un pipeline de Retrieval-Augmented Generation interrogeant un corpus de 34 articles
+        Wikipédia (Transformers, BERT, Word2vec, RAG, évaluation&hellip;) via ChromaDB,
+        SentenceTransformers et Llama&nbsp;3.3 (Groq).
+      </p>
+      <div class="reveal meta">
+        <div class="meta-item"><svg class="icon"><use href="#i-database"/></svg> 1443 chunks &middot; 34 documents</div>
+        <div class="meta-item"><svg class="icon"><use href="#i-zap"/></svg> Groq &middot; Llama 3.3 70B</div>
+        <div class="meta-item"><svg class="icon"><use href="#i-award"/></svg> Université de Nouakchott</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 2 — AGENDA ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-list"/></svg> Sommaire</div>
+    <h1 class="reveal">Plan de la présentation</h1>
+    <p class="subtitle reveal">Huit étapes pour comprendre comment le système transforme une question en réponse fiable et sourcée.</p>
+    <div class="slide-body">
+      <div class="grid grid-2" style="gap:16px;">
+        <div class="step reveal"><div class="step-num">1</div><div class="step-text"><b>Qu'est-ce que le RAG ?</b><br>La vue d'ensemble &mdash; pourquoi associer recherche et génération.</div></div>
+        <div class="step reveal"><div class="step-num">2</div><div class="step-text"><b>Architecture du dépôt</b><br>Organisation des fichiers et des deux pipelines (offline / online).</div></div>
+        <div class="step reveal"><div class="step-num">3</div><div class="step-text"><b>Stack technique</b><br>Les bibliothèques clés et leur rôle.</div></div>
+        <div class="step reveal"><div class="step-num">4</div><div class="step-text"><b>Collecte du corpus</b><br>36 articles Wikipédia récupérés automatiquement.</div></div>
+        <div class="step reveal"><div class="step-num">5</div><div class="step-text"><b>Nettoyage &amp; découpage</b><br>1443 passages prêts à être indexés.</div></div>
+        <div class="step reveal"><div class="step-num">6</div><div class="step-text"><b>Indexation &amp; recherche</b><br>Embeddings MiniLM + ChromaDB + Groq.</div></div>
+        <div class="step reveal"><div class="step-num">7</div><div class="step-text"><b>Application Streamlit</b><br>Chat, évaluation et gestion du corpus.</div></div>
+        <div class="step reveal"><div class="step-num">8</div><div class="step-text"><b>Évaluation &amp; perspectives</b><br>Résultats chiffrés, limites et pistes d'amélioration.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 3 — BIG PICTURE ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-brain"/></svg> Vue d'ensemble</div>
+    <h1 class="reveal">Le RAG en une image</h1>
+    <p class="subtitle reveal">
+      Plutôt que de faire confiance à la mémoire du LLM, on lui fournit les 3 passages les plus
+      pertinents trouvés dans le corpus, puis on lui demande de répondre <b>uniquement</b> à partir de ces extraits.
+    </p>
+    <div class="slide-body" style="gap:28px;">
+      <div class="reveal">
+        <div class="pill"><svg class="icon" style="width:14px;height:14px"><use href="#i-layers"/></svg> Pipeline hors-ligne — indexation</div>
+        <div class="pipeline" style="margin-top:14px;">
+          <div class="pipe-step">
+            <div class="card-icon"><svg class="icon"><use href="#i-file"/></svg></div>
+            <h4>Articles Wikipédia</h4><p>36 pages sur l'IA / NLP</p>
+          </div>
+          <div class="pipe-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></div>
+          <div class="pipe-step">
+            <div class="card-icon"><svg class="icon"><use href="#i-layers"/></svg></div>
+            <h4>Nettoyage &amp; découpage</h4><p>1443 chunks de 512 car.</p>
+          </div>
+          <div class="pipe-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></div>
+          <div class="pipe-step">
+            <div class="card-icon"><svg class="icon"><use href="#i-cpu"/></svg></div>
+            <h4>Embeddings</h4><p>all-MiniLM-L6-v2 (384-d)</p>
+          </div>
+          <div class="pipe-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></div>
+          <div class="pipe-step">
+            <div class="card-icon"><svg class="icon"><use href="#i-database"/></svg></div>
+            <h4>Index ChromaDB</h4><p>Collection <code>nlp_corpus</code></p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="pill gold"><svg class="icon" style="width:14px;height:14px"><use href="#i-search"/></svg> Pipeline en ligne — question utilisateur</div>
+        <div class="pipeline" style="margin-top:14px;">
+          <div class="pipe-step">
+            <div class="card-icon" style="background:var(--gold-100);color:var(--gold-600)"><svg class="icon"><use href="#i-chat"/></svg></div>
+            <h4>Question</h4><p>Posée par l'utilisateur</p>
+          </div>
+          <div class="pipe-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></div>
+          <div class="pipe-step">
+            <div class="card-icon" style="background:var(--gold-100);color:var(--gold-600)"><svg class="icon"><use href="#i-cpu"/></svg></div>
+            <h4>Embedding</h4><p>Même modèle MiniLM</p>
+          </div>
+          <div class="pipe-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></div>
+          <div class="pipe-step">
+            <div class="card-icon" style="background:var(--gold-100);color:var(--gold-600)"><svg class="icon"><use href="#i-search"/></svg></div>
+            <h4>Top-3 chunks</h4><p>Recherche par similarité</p>
+          </div>
+          <div class="pipe-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></div>
+          <div class="pipe-step">
+            <div class="card-icon" style="background:var(--gold-100);color:var(--gold-600)"><svg class="icon"><use href="#i-zap"/></svg></div>
+            <h4>Groq LLM</h4><p>Llama 3.3 70B</p>
+          </div>
+          <div class="pipe-arrow"><svg class="icon"><use href="#i-arrow-right"/></svg></div>
+          <div class="pipe-step">
+            <div class="card-icon" style="background:var(--gold-100);color:var(--gold-600)"><svg class="icon"><use href="#i-check"/></svg></div>
+            <h4>Réponse</h4><p>Sourcée &amp; vérifiable</p>
+          </div>
+        </div>
+      </div>
+      <div class="note-bar reveal">
+        <svg class="icon"><use href="#i-shield"/></svg>
+        <div><b>Pourquoi&nbsp;?</b> Le RAG ancre les réponses du LLM dans des documents vérifiables &mdash; cela réduit les hallucinations,
+        permet des connaissances spécialisées sans fine-tuning, et rend chaque réponse traçable à sa source.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 4 — ARCHITECTURE ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-git"/></svg> Architecture</div>
+    <h1 class="reveal">Organisation du dépôt</h1>
+    <p class="subtitle reveal">Chaque phase du pipeline correspond à un script dédié &mdash; un flux clair, de la donnée brute jusqu'au rapport.</p>
+    <div class="slide-body cols">
+      <div class="col card reveal" style="flex:1.3">
+        <div class="tree">
+          <div><span class="t-folder">rag-nlp-m1/</span></div>
+          <div class="indent">app.py <span class="t-comment">// UI Streamlit</span></div>
+          <div class="indent">collect_corpus.py <span class="t-comment">// Phase 0</span></div>
+          <div class="indent">config.py <span class="t-comment">// constantes partagées</span></div>
+          <div class="indent"><span class="t-folder">src/</span></div>
+          <div class="indent indent">prepare_data.py <span class="t-comment">// Phase 1</span></div>
+          <div class="indent indent">build_index.py <span class="t-comment">// Phase 2</span></div>
+          <div class="indent indent">rag_pipeline.py <span class="t-comment">// Phase 3</span></div>
+          <div class="indent"><span class="t-folder">evaluation/</span></div>
+          <div class="indent indent">eval_questions.json &middot; evaluate.py</div>
+          <div class="indent"><span class="t-folder">visualizations/</span> plot_results.py</div>
+          <div class="indent"><span class="t-folder">data/</span> raw/ &middot; processed/chunks.jsonl</div>
+          <div class="indent"><span class="t-folder">chroma_db/</span> <span class="t-comment">// index persistant</span></div>
+          <div class="indent"><span class="t-folder">report/</span> <span class="t-comment">// rapport LaTeX</span></div>
+        </div>
+      </div>
+      <div class="col" style="gap:14px;display:flex;flex-direction:column;">
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-sliders"/></svg></div>
+          <h3>config.py — source unique de vérité</h3>
+          <p>Taille de chunk, overlap, modèle d'embedding, top-k, modèle Groq : tous les autres
+          fichiers importent ces constantes &mdash; aucune valeur magique dupliquée.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-layers"/></svg></div>
+          <h3>Deux pipelines complémentaires</h3>
+          <p><b>Hors-ligne</b> (une fois) : collecte &rarr; nettoyage &rarr; indexation.
+          <b>En ligne</b> (à chaque question) : embedding &rarr; recherche &rarr; prompt &rarr; LLM.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-chart"/></svg></div>
+          <h3>Évaluation reproductible</h3>
+          <p>34 questions avec sources attendues &rarr; <code>results.csv</code> &rarr; 5 graphiques
+          &rarr; intégrés au rapport LaTeX.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 5 — TECH STACK ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-cpu"/></svg> Stack technique</div>
+    <h1 class="reveal">Outils &amp; bibliothèques</h1>
+    <p class="subtitle reveal">Des choix simples, locaux et reproductibles &mdash; sans infrastructure complexe.</p>
+    <div class="slide-body">
+      <div class="grid grid-4">
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-cpu"/></svg></div>
+          <h3>SentenceTransformers</h3>
+          <p><code>all-MiniLM-L6-v2</code> &mdash; 80 Mo, embeddings 384-d, rapide sur CPU. Même modèle pour l'indexation et les requêtes.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-database"/></svg></div>
+          <h3>ChromaDB</h3>
+          <p>Base vectorielle persistante locale, recherche par plus proches voisins (HNSW), zéro serveur à gérer.</p>
+        </div>
+        <div class="card gold reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-zap"/></svg></div>
+          <h3>Groq + Llama 3.3 70B</h3>
+          <p>Inférence LPU ultra-rapide (&asymp;0,8 s/réponse), API compatible OpenAI, palier gratuit généreux.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-chat"/></svg></div>
+          <h3>Streamlit</h3>
+          <p>Interface web complète (chat, évaluation, gestion du corpus) sans HTML/JS &mdash; widgets &amp; cache intégrés.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-chart"/></svg></div>
+          <h3>Pandas / Matplotlib / Seaborn</h3>
+          <p>Tableaux de résultats et graphiques statiques pour le rapport LaTeX.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-trend"/></svg></div>
+          <h3>Plotly</h3>
+          <p>Graphiques interactifs (zoom, survol) dans l'onglet Évaluation de l'app Streamlit.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-upload"/></svg></div>
+          <h3>PyMuPDF (fitz)</h3>
+          <p>Extraction de texte depuis des PDF uploadés &mdash; ajout de nouveaux documents au corpus.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
+          <h3>python-dotenv</h3>
+          <p>Charge <code>GROQ_API_KEY</code> depuis <code>.env</code> &mdash; clé jamais versionnée dans Git.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 6 — PHASE 1: COLLECTE ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-upload"/></svg> Phase 0 &mdash; collect_corpus.py</div>
+    <h1 class="reveal">Collecte du corpus Wikipédia</h1>
+    <p class="subtitle reveal">Un script va chercher 36 articles sur l'IA/NLP et les enregistre en texte brut dans <code>data/raw/</code>.</p>
+    <div class="slide-body cols">
+      <div class="col" style="gap:14px;display:flex;flex-direction:column;">
+        <div class="step reveal"><div class="step-num"><svg class="icon" style="width:16px;height:16px"><use href="#i-file"/></svg></div>
+          <div class="step-text"><b>36 titres prédéfinis</b><br>Transformer, BERT, GPT, Word2vec, TF-IDF, BLEU, ROUGE, RAG, LangChain, base vectorielle&hellip;</div></div>
+        <div class="step reveal"><div class="step-num"><svg class="icon" style="width:16px;height:16px"><use href="#i-search"/></svg></div>
+          <div class="step-text"><b>API Wikipédia</b><br><code>action=query&amp;prop=extracts&amp;explaintext=True</code> &rarr; texte brut de l'article.</div></div>
+        <div class="step reveal"><div class="step-num"><svg class="icon" style="width:16px;height:16px"><use href="#i-clock"/></svg></div>
+          <div class="step-text"><b>Politesse &amp; robustesse</b><br>Délai de 2&nbsp;s entre requêtes, gestion du HTTP 429, jusqu'à 5 réessais avec backoff exponentiel.</div></div>
+        <div class="step reveal"><div class="step-num"><svg class="icon" style="width:16px;height:16px"><use href="#i-check"/></svg></div>
+          <div class="step-text"><b>Tolérance aux pannes</b><br>Un échec est journalisé (<code>FAILED</code>) et n'interrompt pas le traitement des autres articles.</div></div>
+      </div>
+      <div class="col reveal">
+        <div class="code">
+<span class="c-com"># Pour chaque article :</span><br>
+<span class="c-key">def</span> fetch_article(title):<br>
+&nbsp;&nbsp;<span class="c-com"># appelle l'API Wikipédia</span><br>
+&nbsp;&nbsp;<span class="c-com"># retry: 2**attempt * 2 sec</span><br>
+&nbsp;&nbsp;<span class="c-com"># gère HTTP 429 (Retry-After)</span><br>
+&nbsp;&nbsp;<span class="c-key">return</span> texte_brut<br>
+<br>
+<span class="c-com"># boucle principale</span><br>
+<span class="c-key">for</span> title <span class="c-key">in</span> ARTICLES:<br>
+&nbsp;&nbsp;text = fetch_article(title)<br>
+&nbsp;&nbsp;save(<span class="c-str">f"data/raw/{title}.txt"</span>)<br>
+&nbsp;&nbsp;sleep(<span class="c-num">2.0</span>) <span class="c-com"># politesse</span>
+        </div>
+        <div class="note-bar" style="margin-top:18px;">
+          <svg class="icon"><use href="#i-alert"/></svg>
+          <div><code>data/raw/</code> est <i>gitignored</i> &mdash; pour reconstruire le corpus :
+          relancer ce script, ou repartir directement de <code>chunks.jsonl</code> déjà versionné.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 7 — PHASE 2: NETTOYAGE & CHUNKING ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-layers"/></svg> Phase 1 &mdash; src/prepare_data.py</div>
+    <h1 class="reveal">Nettoyage &amp; découpage en chunks</h1>
+    <p class="subtitle reveal">On élimine le bruit, puis on découpe chaque article en passages de taille fixe &mdash; comme transformer un livre en flashcards.</p>
+    <div class="slide-body cols">
+      <div class="col" style="gap:14px;display:flex;flex-direction:column;">
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-alert"/></svg></div>
+          <h3>1. Filtrage des pages</h3>
+          <p><code>BM25.txt</code> et <code>Tokenization.txt</code> sont des pages d'homonymie Wikipédia
+          (sans contenu réel) &rarr; exclues. 34 documents utiles restent (&gt; minimum de 30).</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-layers"/></svg></div>
+          <h3>2. Suppression de sections</h3>
+          <p>Sections <code>See also</code>, <code>References</code>, <code>Further reading</code>,
+          <code>External links</code>, <code>Notes</code> détectées via <code>== Titre ==</code> et supprimées.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-search"/></svg></div>
+          <h3>3. Découpage glissant</h3>
+          <p>Fenêtre de <b>512 caractères</b> avec chevauchement de <b>50</b> &mdash; évite de couper une phrase clé
+          exactement à la frontière entre deux chunks.</p>
+        </div>
+      </div>
+      <div class="col" style="gap:18px;display:flex;flex-direction:column;justify-content:center;">
+        <div class="grid grid-2">
+          <div class="stat card reveal">
+            <div class="stat-value">34</div>
+            <div class="stat-label">Documents utiles</div>
+          </div>
+          <div class="stat card reveal">
+            <div class="stat-value">1443</div>
+            <div class="stat-label">Chunks générés</div>
+          </div>
+          <div class="stat card reveal">
+            <div class="stat-value">512 <span class="unit">car.</span></div>
+            <div class="stat-label">Taille de chunk</div>
+          </div>
+          <div class="stat card reveal">
+            <div class="stat-value">50 <span class="unit">car.</span></div>
+            <div class="stat-label">Chevauchement</div>
+          </div>
+        </div>
+        <div class="code reveal">
+{<span class="c-key">"id"</span>: <span class="c-str">"BERT_3"</span>, <span class="c-key">"source"</span>: <span class="c-str">"BERT (language model)"</span>,<br>&nbsp;<span class="c-key">"text"</span>: <span class="c-str">"BERT is designed to..."</span>}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 8 — PHASE 3: INDEXATION ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-database"/></svg> Phase 2 &mdash; src/build_index.py</div>
+    <h1 class="reveal">Embeddings &amp; index vectoriel</h1>
+    <p class="subtitle reveal">Chaque chunk devient un vecteur de 384 nombres qui capture son sens &mdash; comme une coordonnée GPS sur une "carte du sens".</p>
+    <div class="slide-body cols">
+      <div class="col reveal">
+        <div class="code">
+<span class="c-com"># 1. Charger les chunks</span><br>
+chunks = load_chunks(<span class="c-str">"chunks.jsonl"</span>)<br>
+<br>
+<span class="c-com"># 2. Encoder en vecteurs 384-d</span><br>
+model = SentenceTransformer(<span class="c-str">"all-MiniLM-L6-v2"</span>)<br>
+embeddings = model.encode(texts, batch_size=<span class="c-num">64</span>)<br>
+<br>
+<span class="c-com"># 3. (Re)créer la collection ChromaDB</span><br>
+client = PersistentClient(<span class="c-str">"chroma_db/"</span>)<br>
+collection = client.create_collection(<span class="c-str">"nlp_corpus"</span>)<br>
+<br>
+<span class="c-com"># 4. Stocker id + embedding + texte + source</span><br>
+collection.add(ids, embeddings, documents, metadatas)
+        </div>
+      </div>
+      <div class="col" style="gap:14px;display:flex;flex-direction:column;">
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-cpu"/></svg></div>
+          <h3>1443 &times; 384 vecteurs</h3>
+          <p>Encodage par lots de 64 avec barre de progression &mdash; quelques minutes sur CPU.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-database"/></svg></div>
+          <h3>Suppression &amp; recréation</h3>
+          <p>La collection <code>nlp_corpus</code> est supprimée puis recréée à chaque exécution &mdash;
+          garantit qu'elle correspond exactement à <code>chunks.jsonl</code>, sans doublons.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-check"/></svg></div>
+          <h3>Vérification automatique</h3>
+          <p>Une requête test ("What is attention in machine learning?") affiche les 3 chunks les
+          plus proches &mdash; pour confirmer que l'index a du sens avant de continuer.</p>
+        </div>
+        <div class="note-bar">
+          <svg class="icon"><use href="#i-shield"/></svg>
+          <div><code>chroma_db/</code> est <i>gitignored</i> : 100% reproductible depuis
+          <code>chunks.jsonl</code> via <code>python -m src.build_index</code>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 9 — PHASE 4: RETRIEVAL + LLM ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-search"/></svg> Phase 3 &mdash; src/rag_pipeline.py</div>
+    <h1 class="reveal">Récupération &amp; génération</h1>
+    <p class="subtitle reveal">Le "cerveau" du projet : transformer la question, retrouver les passages pertinents, puis demander au LLM de répondre uniquement à partir d'eux.</p>
+    <div class="slide-body cols">
+      <div class="col" style="gap:14px;display:flex;flex-direction:column;">
+        <div class="step reveal"><div class="step-num">1</div>
+          <div class="step-text"><b>Encoder la question</b><br>Même modèle MiniLM &rarr; vecteur 384-d, comparable aux chunks indexés.</div></div>
+        <div class="step reveal"><div class="step-num">2</div>
+          <div class="step-text"><b>retrieve()</b><br><code>collection.query(query_embeddings, n_results=3)</code> &rarr; top-3 chunks (id, texte, source).</div></div>
+        <div class="step reveal"><div class="step-num">3</div>
+          <div class="step-text"><b>build_prompt()</b><br>Assemble les chunks dans un gabarit anti-hallucination strict.</div></div>
+        <div class="step reveal"><div class="step-num">4</div>
+          <div class="step-text"><b>generate_answer()</b><br>Appel à <code>groq.chat.completions.create(model="llama-3.3-70b-versatile", ...)</code>.</div></div>
+      </div>
+      <div class="col reveal">
+        <div class="code">
+<span class="c-com"># PROMPT_TEMPLATE</span><br>
+<span class="c-str">"""Answer the question using only the</span><br>
+<span class="c-str">context below. If the context does not</span><br>
+<span class="c-str">contain the answer, say you don't know.</span><br>
+<br>
+<span class="c-str">Context:</span><br>
+<span class="c-str">{context}</span><br>
+<br>
+<span class="c-str">Question: {question}</span><br>
+<br>
+<span class="c-str">Answer:"""</span>
+        </div>
+        <div class="grid grid-2" style="margin-top:16px;">
+          <div class="pill"><svg class="icon" style="width:14px;height:14px"><use href="#i-check"/></svg> Réponse ancrée &amp; traçable</div>
+          <div class="pill gold"><svg class="icon" style="width:14px;height:14px"><use href="#i-chat"/></svg> Mono-tour (sans historique)</div>
+        </div>
+        <div class="note-bar" style="margin-top:16px;">
+          <svg class="icon"><use href="#i-alert"/></svg>
+          <div>Même modèle d'embedding à l'indexation et à la requête : des modèles différents
+          produisent des espaces vectoriels différents &mdash; la comparaison serait sans sens.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 10 — CONFIG.PY ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-sliders"/></svg> config.py</div>
+    <h1 class="reveal">Une seule source de vérité</h1>
+    <p class="subtitle reveal">Comme le menu d'options d'un jeu vidéo : tous les scripts lisent leurs paramètres ici &mdash; rien n'est jamais redéfini ailleurs.</p>
+    <div class="slide-body cols">
+      <div class="col reveal">
+        <div class="code" style="font-size:16px;line-height:2.3;">
+CHUNK_SIZE = <span class="c-num">512</span><br>
+CHUNK_OVERLAP = <span class="c-num">50</span><br>
+EMBEDDING_MODEL = <span class="c-str">"all-MiniLM-L6-v2"</span><br>
+TOP_K = <span class="c-num">3</span><br>
+GROQ_MODEL = <span class="c-str">"llama-3.3-70b-versatile"</span>
+        </div>
+      </div>
+      <div class="col" style="gap:12px;display:flex;flex-direction:column;">
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-layers"/></svg></div>
+          <h3>CHUNK_SIZE = 512 / OVERLAP = 50</h3>
+          <p>≈ deux phrases : assez ciblé pour la précision, assez large pour le contexte. L'overlap évite de couper une idée en deux.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-cpu"/></svg></div>
+          <h3>EMBEDDING_MODEL</h3>
+          <p>Utilisé à l'identique pour l'indexation <i>et</i> les requêtes &mdash; cohérence indispensable des espaces vectoriels.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-target"/></svg></div>
+          <h3>TOP_K = 3</h3>
+          <p>Équilibre entre contexte suffisant pour le LLM et taille du prompt / latence / bruit.</p>
+        </div>
+        <div class="note-bar">
+          <svg class="icon"><use href="#i-settings"/></svg>
+          <div>Changer <code>CHUNK_SIZE</code> impose de relancer <code>prepare_data.py</code> <b>et</b>
+          <code>build_index.py</code> &mdash; faisable aussi depuis l'onglet "Corpus Management" de l'app.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 11 — STREAMLIT APP ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-chat"/></svg> Phase 4 &mdash; app.py</div>
+    <h1 class="reveal">Application Streamlit</h1>
+    <p class="subtitle reveal">Trois onglets pour discuter avec le corpus, mesurer la qualité du système, et gérer les documents &mdash; sans terminal.</p>
+    <div class="slide-body">
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-chat"/></svg></div>
+          <h3>Onglet Chat</h3>
+          <p>Pose une question, récupère une réponse avec badges (temps, nb. de chunks, fidélité)
+          et un panneau listant les sources utilisées avec leur score de similarité.</p>
+        </div>
+        <div class="card gold reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-chart"/></svg></div>
+          <h3>Onglet Évaluation</h3>
+          <p>Charge un jeu de questions, lance l'évaluation, visualise précision/rappel/fidélité
+          par graphiques Plotly interactifs, exporte CSV ou PDF.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-settings"/></svg></div>
+          <h3>Onglet Corpus Management</h3>
+          <p>Ajoute des documents (PDF/TXT), relance le découpage, sélectionne les sources
+          à indexer, et reconstruit l'index ChromaDB en un clic.</p>
+        </div>
+      </div>
+      <div class="grid grid-2" style="margin-top:20px;">
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-sliders"/></svg></div>
+          <h3>Barre latérale</h3>
+          <p>Sélection du modèle LLM, curseurs <code>top_k</code> (1&ndash;10) et seuil de similarité
+          (0&ndash;1), état de l'index, statut de la clé API Groq.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-target"/></svg></div>
+          <h3>Seuil de similarité</h3>
+          <p><code>similarity = 1 / (1 + distance)</code> &mdash; convertit la distance ChromaDB
+          (0 = identique) en score borné (0,1] pour filtrer les chunks peu pertinents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 12 — EVALUATION METHODOLOGY ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-target"/></svg> Phase 5 &mdash; evaluation/</div>
+    <h1 class="reveal">Méthodologie d'évaluation</h1>
+    <p class="subtitle reveal">34 questions, chacune associée à un ou plusieurs documents "attendus" &mdash; quatre métriques mesurent la qualité bout-en-bout.</p>
+    <div class="slide-body">
+      <div class="grid grid-2" style="flex:1">
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-target"/></svg></div>
+          <h3>Precision@3</h3>
+          <p><code>relevant / retrieved</code> &mdash; parmi les 3 chunks récupérés, quelle fraction
+          provient d'un document attendu&nbsp;?</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-search"/></svg></div>
+          <h3>Recall@3</h3>
+          <p><code>|relevant docs| / |expected docs|</code> &mdash; le document attendu figure-t-il
+          parmi les chunks récupérés&nbsp;?</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
+          <h3>Faithfulness (fidélité)</h3>
+          <p><code>|mots réponse &cap; mots contexte| / |mots réponse|</code> &mdash; la réponse
+          réutilise-t-elle le vocabulaire du contexte fourni&nbsp;? Proxy lexical de l'ancrage.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-clock"/></svg></div>
+          <h3>Temps de réponse</h3>
+          <p>Mesuré via <code>time.perf_counter()</code> &mdash; de la requête à la réponse complète du LLM.</p>
+        </div>
+      </div>
+      <div class="note-bar reveal">
+        <svg class="icon"><use href="#i-alert"/></svg>
+        <div><b>Cas honnête &mdash; FastText vs Word2vec :</b> recall peut rester à 1.0 (le bon document est trouvé)
+        alors que la précision chute (2 des 3 chunks proviennent d'un article sémantiquement proche mais différent).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 13 — RESULTS ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-chart"/></svg> Résultats</div>
+    <h1 class="reveal">Performance du système</h1>
+    <p class="subtitle reveal">Moyennes obtenues sur les 34 questions d'évaluation (<code>evaluation/results.csv</code>).</p>
+    <div class="slide-body cols">
+      <div class="col" style="gap:14px;display:flex;flex-direction:column;justify-content:center;">
+        <div class="grid grid-2">
+          <div class="stat card reveal">
+            <div class="stat-value">0.922</div>
+            <div class="stat-label"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-target"/></svg> Precision@3</div>
+          </div>
+          <div class="stat card reveal">
+            <div class="stat-value">0.985</div>
+            <div class="stat-label"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-search"/></svg> Recall@3</div>
+          </div>
+          <div class="stat card reveal">
+            <div class="stat-value">0.887</div>
+            <div class="stat-label"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-shield"/></svg> Faithfulness</div>
+          </div>
+          <div class="stat card reveal">
+            <div class="stat-value">0.81<span class="unit">s</span></div>
+            <div class="stat-label"><svg class="icon" style="width:14px;height:14px;vertical-align:-2px"><use href="#i-clock"/></svg> Temps de réponse</div>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-check"/></svg></div>
+          <h3>En résumé</h3>
+          <p>La bonne information est presque toujours atteignable (recall élevé), la récupération
+          cible rarement des documents hors-sujet (précision élevée), et les réponses du LLM
+          restent globalement ancrées dans le contexte fourni &mdash; avec une latence sub-seconde
+          grâce à Groq.</p>
+        </div>
+      </div>
+      <div class="col reveal">
+        <div class="img-frame">
+          <img src="assets/average_metrics.png" alt="Métriques moyennes">
+          <div class="img-caption">average_metrics.png &mdash; moyennes Precision@3 / Recall@3 / Faithfulness</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 14 — LIMITATIONS ===================== -->
+  <section class="slide">
+    <div class="slide-eyebrow reveal"><svg class="icon"><use href="#i-alert"/></svg> Discussion</div>
+    <h1 class="reveal">Limites &amp; perspectives</h1>
+    <p class="subtitle reveal">Un système simple et efficace &mdash; avec des axes d'amélioration clairs et assumés.</p>
+    <div class="slide-body">
+      <div class="grid grid-3">
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-layers"/></svg></div>
+          <h3>Découpage par caractères</h3>
+          <p>Simple et déterministe, mais pas conscient des phrases/tokens. Amélioration possible : découpage sémantique.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
+          <h3>Fidélité = chevauchement lexical</h3>
+          <p>Une réponse correcte mais reformulée peut obtenir un score bas. Piste : LLM-as-judge.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-search"/></svg></div>
+          <h3>Pas de re-ranking</h3>
+          <p>Aucune étape de réordonnancement après la recherche. Piste : cross-encoder re-ranker.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-book"/></svg></div>
+          <h3>Corpus anglophone</h3>
+          <p>Articles Wikipédia en anglais uniquement. Piste : embeddings et corpus multilingues.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-chat"/></svg></div>
+          <h3>Pas de mémoire conversationnelle</h3>
+          <p>Chaque question est traitée indépendamment &mdash; pas d'historique injecté dans le prompt.</p>
+        </div>
+        <div class="card reveal">
+          <div class="card-icon"><svg class="icon"><use href="#i-target"/></svg></div>
+          <h3>Précision sur sujets proches</h3>
+          <p>Des thématiques proches (FastText / Word2vec) peuvent faire chuter la précision malgré un bon rappel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SLIDE 15 — CONCLUSION ===================== -->
+  <section class="slide slide-title">
+    <div class="slide-body" style="justify-content:center;">
+      <div class="reveal slide-eyebrow" style="justify-content:center;">
+        <svg class="icon"><use href="#i-flag"/></svg> Conclusion
+      </div>
+      <h1 class="reveal">Merci pour votre <span class="accent">attention</span></h1>
+      <p class="reveal subtitle">
+        Un pipeline RAG complet, local et reproductible &mdash; de la collecte Wikipédia
+        jusqu'à une réponse sourcée en moins d'une seconde, avec une interface
+        Streamlit interactive pour la démonstration.
+      </p>
+      <div class="reveal grid grid-3" style="max-width:760px;margin:0 auto;">
+        <div class="card">
+          <div class="card-icon" style="margin:0 auto"><svg class="icon"><use href="#i-database"/></svg></div>
+          <h3 style="text-align:center">34 documents</h3>
+          <p style="text-align:center">1443 chunks indexés</p>
+        </div>
+        <div class="card gold">
+          <div class="card-icon" style="margin:0 auto;background:var(--gold-100);color:var(--gold-600)"><svg class="icon"><use href="#i-target"/></svg></div>
+          <h3 style="text-align:center">92&ndash;99%</h3>
+          <p style="text-align:center">Précision &amp; rappel @3</p>
+        </div>
+        <div class="card">
+          <div class="card-icon" style="margin:0 auto"><svg class="icon"><use href="#i-zap"/></svg></div>
+          <h3 style="text-align:center">&asymp; 0.8 s</h3>
+          <p style="text-align:center">Temps de réponse moyen</p>
+        </div>
+      </div>
+      <div class="reveal meta" style="margin-top:32px;">
+        <div class="meta-item"><svg class="icon"><use href="#i-chat"/></svg> Questions &amp; discussion</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="navbar">
+  <button class="nav-btn" id="prevBtn" aria-label="Diapositive précédente">
+    <svg class="icon"><use href="#i-arrow-left"/></svg>
+  </button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="nextBtn" aria-label="Diapositive suivante">
+    <svg class="icon"><use href="#i-arrow-right"/></svg>
+  </button>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
